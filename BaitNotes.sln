@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36603.0 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaitNotes", "BaitNotes.csproj", "{545F362A-CEA7-4158-A605-1849FC4B87D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{545F362A-CEA7-4158-A605-1849FC4B87D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545F362A-CEA7-4158-A605-1849FC4B87D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545F362A-CEA7-4158-A605-1849FC4B87D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545F362A-CEA7-4158-A605-1849FC4B87D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F01DA265-1326-4AFF-93A4-C7019944927D}
+	EndGlobalSection
+EndGlobal

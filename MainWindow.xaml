@@ -49,12 +49,12 @@
            Canvas.Left="104"
            Canvas.Top="20"/>
                 <TextBlock TextWrapping="Wrap"
-           Text="Name will appear here."
+           Text="Click on a scammer to begin"
            Opacity="1"
            x:Name="scammerName"
            FontSize="24" Canvas.Left="10" Canvas.Top="173" HorizontalAlignment="Center" VerticalAlignment="Center" Width="316" TextAlignment="Center" Foreground="White"/>
                 <TextBlock TextWrapping="Wrap"
-                    Text="Number will appear here."
+                    Text="... or add a scammer"
                     Opacity="1"
                     x:Name="scammerNumber"
                     FontSize="16" Canvas.Left="10" Canvas.Top="205" Width="316" TextAlignment="Center" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top"/>
@@ -89,5 +89,6 @@
 
             </Canvas>
         </Border>
+        <Button Content="Add..." HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" Width="80" Click="Add_Click" FontSize="25" Background="#FF13A713"/>
     </Grid>
 </Window>

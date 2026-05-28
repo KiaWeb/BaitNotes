@@ -43,7 +43,7 @@ namespace BaitNotes
         public MainWindow()
         {
             InitializeComponent();
-            LoadScammersFromXml("Scammers.xml");
+            LoadScammersFromXml("scammers.xml");
         }
 
 
@@ -115,6 +115,7 @@ namespace BaitNotes
             var grid = new Grid();
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
             var img = new Image
             {
@@ -206,6 +207,54 @@ namespace BaitNotes
             grid.Children.Add(img);
             grid.Children.Add(stack);
             Grid.SetColumn(stack, 1);
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            var modifyButton = new Button
+            {
+                Content = "Modify",
+                Width = 75,
+                Height = 30,
+                Margin = new Thickness(10, 0, 0, 0),
+                Background = new SolidColorBrush(Color.FromRgb(60, 100, 180)),
+                Foreground = Brushes.White,
+                Cursor = Cursors.Hand
+            };
+
+            modifyButton.Click += (sender, e) =>
+            {
+                e.Handled = true;
+
+                AddContact editWindow = new AddContact(scammer);
+                editWindow.ShowDialog();
+
+                LoadScammersFromXml("scammers.xml");
+            };
+
+            grid.Children.Add(modifyButton);
+            Grid.SetColumn(modifyButton, 2);
+
+            var removeButton = new Button
+            {
+                Content = "X",
+                Width = 45,
+                Height = 30,
+                Margin = new Thickness(10, 0, 0, 0),
+                Background = new SolidColorBrush(Color.FromRgb(160, 40, 40)),
+                Foreground = Brushes.White,
+                Cursor = Cursors.Hand
+            };
+
+            removeButton.Click += (sender, e) =>
+            {
+                e.Handled = true;
+
+                RemoveScammerFromXml(scammer);
+                LoadScammersFromXml("scammers.xml");
+            };
+
+            grid.Children.Add(removeButton);
+            Grid.SetColumn(removeButton, 3);
 
             border.Child = grid;
             border.MouseLeftButtonUp += (sender, e) =>
@@ -215,6 +264,27 @@ namespace BaitNotes
             };
 
             return border;
+        }
+        private void RemoveScammerFromXml(Scammer scammer)
+        {
+            string path = "scammers.xml";
+
+            if (!File.Exists(path))
+                return;
+
+            XDocument doc = XDocument.Load(path);
+
+            XElement? match = doc.Descendants("Scammer")
+                .FirstOrDefault(x =>
+                    ((string?)x.Element("Name") ?? "") == scammer.Name &&
+                    ((string?)x.Element("Number") ?? "") == scammer.Number
+                );
+
+            if (match != null)
+            {
+                match.Remove();
+                doc.Save(path);
+            }
         }
         private void CreateBase64Img(string base64OrKeyword, Image target)
         {
@@ -275,26 +345,60 @@ namespace BaitNotes
 
             }
 
-            MessageBox.Show($"You clicked on {scammer.Name} ({scammer.Number}) with status {scammer.Status}");
         }
+
+        private SessionWindow? activeSessionWindow = null;
 
         private void Session_Start(object sender, RoutedEventArgs e)
         {
+            if (sender is not Button btn)
+                return;
+
+            string number = "";
+
             foreach (var child in MainCanvas.Children)
             {
-
-                if (child is TextBlock tb2 && tb2.Name == "scammerNumber")
+                if (child is TextBlock tb && tb.Name == "scammerNumber")
                 {
-                    if (tb2.Text == "Number will appear here.")
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Session Started with " + tb2.Text);
-                    }
+                    number = tb.Text;
+                    break;
                 }
             }
+
+            if (number == "Number will appear here." || string.IsNullOrWhiteSpace(number))
+                return;
+
+            if (activeSessionWindow == null)
+            {
+                btn.Content = "Stop Session";
+                btn.Background = Brushes.DarkRed;
+                btn.Foreground = Brushes.White;
+                activeSessionWindow = new SessionWindow();
+                activeSessionWindow.Show();
+
+                activeSessionWindow.Closed += (s, args) =>
+                {
+                    btn.Content = "Start Session";
+                    btn.Background = Brushes.DarkGreen;
+                    btn.Foreground = Brushes.White;
+                    activeSessionWindow.EndSession();
+                    activeSessionWindow = null;
+                };
+            }
+            else
+            {
+                btn.Content = "Start Session";
+                btn.Background = Brushes.DarkGreen;
+                btn.Foreground = Brushes.White;
+                activeSessionWindow.EndSession();
+                activeSessionWindow.Close();
+                activeSessionWindow = null;
+            }
+        }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddContact window = new AddContact();
+            window.Show();
         }
     }
 }

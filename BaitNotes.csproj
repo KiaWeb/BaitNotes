@@ -13,6 +13,7 @@
     <None Remove="Assets\ding.wav" />
     <None Remove="Assets\exit.wav" />
     <None Remove="Assets\water.wav" />
+    <None Remove="scammers.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +28,9 @@
     </Content>
     <Content Include="Assets\water.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scammers.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

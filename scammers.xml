@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scammers>
+  <Scammer>
+    <Name>Norton Nimrod</Name>
+    <Number>+1 (800) 555-5555</Number>
+    <Status>BusyLine</Status>
+    <ImageBase64>green</ImageBase64>
+  </Scammer>
+  <Scammer>
+    <Name>PCH L***ra</Name>
+    <Number>+1 (800) 555-5555</Number>
+    <Status>Closed</Status>
+    <ImageBase64>blue</ImageBase64>
+  </Scammer>
+  <Scammer>
+    <Name>Apple A**holes </Name>
+    <Number>+1 (800) 555-5555</Number>
+    <Status>Permanently Shutdown</Status>
+    <ImageBase64>yellow</ImageBase64>
+  </Scammer>
+  <Scammer>
+    <Name>Microc**d</Name>
+    <Number>+1 (800) 555-5555</Number>
+    <Status>Operating</Status>
+    <ImageBase64>purple</ImageBase64>
+  </Scammer>
+</Scammers>

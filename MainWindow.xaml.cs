@@ -104,6 +104,8 @@ namespace BaitNotes
         {
             var border = new Border
             {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Top,
                 Background = new SolidColorBrush(Color.FromRgb(45, 45, 45)),
                 CornerRadius = new CornerRadius(10),
                 Padding = new Thickness(10),
@@ -194,6 +196,7 @@ namespace BaitNotes
             }
 
             var stack = new StackPanel();
+            stack.HorizontalAlignment = HorizontalAlignment.Stretch;
             stack.Children.Add(new TextBlock { Text = scammer.Name, Foreground = Brushes.White, FontSize = 16, FontWeight = FontWeights.Bold,
                 TextWrapping = TextWrapping.NoWrap
             });
